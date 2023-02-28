@@ -9,7 +9,8 @@ class App {
     this.config();
 
     // Não remover essa rota
-    this.app.get('/', (req, res) => res.json({ oka: true }));
+    this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.app.post('/user', (req, res) => res.json({ message: 'pinto' }));
   }
 
   private config():void {
