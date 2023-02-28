@@ -1,4 +1,5 @@
 import * as express from 'express';
+import TeamController from './controllers/team.controller';
 
 class App {
   public app: express.Express;
@@ -6,11 +7,14 @@ class App {
   constructor() {
     this.app = express();
 
+    const teamController = new TeamController();
+
     this.config();
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
-    this.app.post('/user', (req, res) => res.json({ message: 'pinto' }));
+    this.app.get('/teams', teamController.getAll);
+    this.app.get('/teams/:id', teamController.getById);
   }
 
   private config():void {

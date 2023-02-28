@@ -3,7 +3,7 @@ import db from '.';
 
 class Team extends Model {
   declare id: number;
-  declare team: string;
+  declare teamName: string;
 }
 
 Team.init({
@@ -13,7 +13,7 @@ Team.init({
     primaryKey: true,
     autoIncrement: true,
   },
-  team: {
+  teamName: {
     type: STRING,
     allowNull: false,
   },
