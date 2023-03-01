@@ -16,7 +16,7 @@ module.exports = {
           // senha: secret_user
       },
       // os logins abaixo são intencionalmente inválidos, pois serão usados nos testes
-/*       {
+       {
         username: 'User',
         role: 'user',
         email: '@user.com',
@@ -29,7 +29,7 @@ module.exports = {
         email: 'invalid.user@user.com',
         password: '$2a$10$HDkFwOMKOI6PTza0F7.YRu1Bqsqb9hx7XkuV7QeYB5dRL4z9DI1Mu',
         // senha: 12345
-      }, */
+      },
     ], {});
   },
 
