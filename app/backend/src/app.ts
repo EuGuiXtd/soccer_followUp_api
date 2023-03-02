@@ -2,6 +2,7 @@ import * as express from 'express';
 import TeamController from './controllers/team.controller';
 import UserController from './controllers/user.controller';
 import MiddlewareLogin from './middlewares/login.middlewares';
+import ValidateJWT from './middlewares/validateJWT';
 
 class App {
   public app: express.Express;
@@ -18,7 +19,8 @@ class App {
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.get('/teams', teamController.getAll);
     this.app.get('/teams/:id', teamController.getById);
-    this.app.post('/login', MiddlewareLogin.validate, userController.login);
+    this.app.post('/login', MiddlewareLogin.validateLogin, userController.login);
+    this.app.get('/login/role', ValidateJWT.validateJWT, userController.getUserRole);
   }
 
   private config():void {

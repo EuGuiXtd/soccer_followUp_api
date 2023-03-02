@@ -3,6 +3,7 @@ import * as bcrypt from 'bcryptjs';
 import User from '../database/models/UserModel';
 import Token from '../interfaces/token.interfaces';
 import GenerateToken from '../Utils/GenerateToken';
+import Role from '../interfaces/role.interface';
 /* import Password from '../interfaces/password.interface'; */
 
 class UserService {
@@ -27,6 +28,12 @@ class UserService {
       return null;
     }
     return { token: Tokens };
+  }
+
+  public async getUserRole(email: string): Promise<Role> {
+    const user = await this.model.findOne({ where: { email } });
+    const role = user?.role || '';
+    return { role };
   }
 }
 

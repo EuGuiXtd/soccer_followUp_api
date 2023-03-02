@@ -25,12 +25,38 @@ describe('Testa a função login das camadas controller e service de user', () =
     sinon.restore();
   })
 
-  it('Teste da controller e Service', async () => {
+  it('Teste da controller', async () => {
     const res = await chai.request(app).post('/login').send({
         "email": "admin@admin.com",
-        "password": "$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW"
+        "password": "secret_admin"
       });
 
     chai.expect(res.status).to.equal(200);
+  })
+
+  it('Teste da Service', async () => {
+    const res = await chai.request(app).post('/login').send({
+        "email": "@admin.com",
+        "password": "secret_admin"
+      });
+
+    chai.expect(res.status).to.equal(401);
+  })
+
+  it('Teste da Service', async () => {
+    const res = await chai.request(app).post('/login').send({
+      "email": "teste@admin.com",
+      "password": "secret_admin"
+    });
+    
+    chai.expect(res.status).to.equal(401);
+  })
+
+  it('Teste de Middlewares', async () => {
+    const res = await chai.request(app).post('/login').send({
+        "email": "admin@admin.com",
+      });
+  
+    chai.expect(res.status).to.equal(400);
   })
 });

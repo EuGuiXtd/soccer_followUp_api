@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 export default class MiddlewareLogin {
-  public static validate(req: Request, res: Response, next: NextFunction) {
+  public static validateLogin(req: Request, res: Response, next: NextFunction) {
     const { email, password } = req.body;
     const regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/g;
 
