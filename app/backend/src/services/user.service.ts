@@ -10,7 +10,7 @@ class UserService {
     private generateToken = new GenerateToken(),
   ) { }
 
-  public async login(email: string, password: string): Promise<Token> {
+  public async login(email: string, password: string): Promise<Token | null> {
     const payload = {
       email,
     };

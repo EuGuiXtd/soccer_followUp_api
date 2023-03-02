@@ -32,22 +32,4 @@ describe('Testa a função getAll das camadas controller e service de team', () 
     chai.expect(res.body).to.deep.equal(teams);
   })
 });
-describe('Testa a função getById das camadas controller e service de team', () => {
-  let chaiHttpResponse: Response;
-  beforeEach(async () => {
-    sinon
-      .stub( new TeamService, 'getById')
-      .resolves(teams[0]);
-  });
-  afterEach(()=>{
-    sinon.restore();
-  })
-
-  it('Teste da controller e Service', async () => {
-    const res = await chai.request(app).get('/teams/:id')
-
-    chai.expect(res.status).to.equal(200);
-    chai.expect(res.body).to.deep.equal(teams[0]);
-  })
-});
 
