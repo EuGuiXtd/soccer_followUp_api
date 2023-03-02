@@ -1,7 +1,7 @@
 import { INTEGER, STRING, Model } from 'sequelize';
 import db from '.';
 
-class UserModel extends Model {
+class User extends Model {
   declare id: number;
   declare username: string;
   declare role: string;
@@ -9,34 +9,45 @@ class UserModel extends Model {
   declare password: string;
 }
 
-UserModel.init({
+User.init({
   id: {
-    primaryKey: true,
-    allowNull: false,
-    autoIncrement: true,
     type: INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
   },
   username: {
-    allowNull: false,
     type: STRING,
+    allowNull: false,
   },
   role: {
-    allowNull: false,
     type: STRING,
+    allowNull: false,
   },
   email: {
-    allowNull: false,
     type: STRING,
+    allowNull: false,
   },
   password: {
-    allowNull: false,
     type: STRING,
+    allowNull: false,
   },
 }, {
-  sequelize: db,
   underscored: true,
-  modelName: 'users',
+  sequelize: db,
+  modelName: 'User',
   timestamps: false,
 });
 
-export default UserModel;
+/**
+  * `Workaround` para aplicar as associations em TS:
+  * Associations 1:N devem ficar em uma das instâncias de modelo
+  * */
+
+// OtherModel.belongsTo(Example, { foreignKey: 'campoA', as: 'campoEstrangeiroA' });
+// OtherModel.belongsTo(Example, { foreignKey: 'campoB', as: 'campoEstrangeiroB' });
+
+// Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
+// Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
+
+export default User;
