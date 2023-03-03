@@ -26,6 +26,7 @@ class App {
     this.app.get('/matches', matchController.getAll);
     this.app.patch('/matches/:id/finish', ValidateJWT.validateJWT, matchController.attMatch);
     this.app.patch('/matches/:id', ValidateJWT.validateJWT, matchController.attMatchScore);
+    this.app.post('/matches', ValidateJWT.validateJWT, matchController.createMatch);
   }
 
   private config():void {

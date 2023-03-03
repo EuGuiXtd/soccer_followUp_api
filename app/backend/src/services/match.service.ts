@@ -3,8 +3,11 @@ import Match from '../database/models/MatchModel';
 import Matches from '../interfaces/match.interface';
 import Team from '../database/models/TeamModel';
 import Res from '../interfaces/res.interface';
+import CreateMatch from '../interfaces/createMatch.interface';
+import TeamService from './team.service';
 
 class MatchService {
+  constructor(private teamService = new TeamService()) { }
   public model: ModelStatic<Match> = Match;
 
   async getAllFiltered(boolean: boolean | undefined | string): Promise<Matches[]> {
@@ -39,6 +42,27 @@ class MatchService {
       { where: { id } },
     );
     return { message: 'Finished' };
+  }
+
+  async createMatch(
+    _homeTeamId: number,
+    _awayTeamId: number,
+    _homeTeamGoals: number,
+    _awayTeamGoals: number,
+  ): Promise<CreateMatch | null | undefined> {
+    const homeTeam = await this.model.findByPk(_homeTeamId);
+    const awayTeam = await this.model.findByPk(_awayTeamId);
+    if (!homeTeam || !awayTeam) {
+      return undefined;
+    }
+    const match = await this.model.create({
+      homeTeamId: _homeTeamId,
+      awayTeamId: _awayTeamId,
+      homeTeamGoals: _homeTeamGoals,
+      awayTeamGoals: _awayTeamGoals,
+      inProgress: true,
+    }); if (_homeTeamId === _awayTeamId) { return null; }
+    return match;
   }
 }
 

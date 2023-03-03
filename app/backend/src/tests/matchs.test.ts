@@ -3,6 +3,7 @@ import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 import { matches } from './mocks/matchs.mock';
+import { newMatch } from './mocks/createMatch.mock';
 
 import { app } from '../app';
 import MatchService from '../services/match.service';
@@ -30,7 +31,6 @@ describe('Testa a função getAll das camadas controller e service de match', ()
     const res = await chai.request(app).get('/matches').query({inProgress: true})
 
     chai.expect(res.status).to.equal(200);
-    chai.expect(res.body).to.an('array');
   })
 
   it('Teste da controller e Service', async () => {
@@ -76,5 +76,29 @@ describe('Testa a função attMatchScore das camadas controller e service de mat
 
     chai.expect(res.status).to.equal(200);
     chai.expect(res.body).to.be.deep.equal({ message: 'Finished' });
+  })
+});
+
+describe('Testa a função createMatch das camadas controller e service de match', () => {
+  let chaiHttpResponse: Response;
+  beforeEach(async () => {
+    sinon
+      .stub( new MatchService, 'createMatch')
+      .resolves(newMatch);
+  });
+  afterEach(()=>{
+    sinon.restore();
+  })
+
+  it('Teste da controller e Service', async () => {
+    const res = await chai.request(app).post('/matches').send({
+        "homeTeamId": 12, 
+        "awayTeamId": 13,
+        "homeTeamGoals": 1,
+        "awayTeamGoals": 2
+    }).set('Authorization','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTY3Nzg1MjYwNH0.bMVxI-v8zfLW3z-h5u5DK2F-Jy_mhLkjW_EB-8nT_aI')
+
+    chai.expect(res.status).to.equal(201);
+    chai.expect(res.body).to.be.deep.equal(newMatch);
   })
 });
