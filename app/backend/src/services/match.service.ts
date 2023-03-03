@@ -2,6 +2,7 @@ import { ModelStatic } from 'sequelize';
 import Match from '../database/models/MatchModel';
 import Matches from '../interfaces/match.interface';
 import Team from '../database/models/TeamModel';
+import Res from '../interfaces/res.interface';
 
 class MatchService {
   public model: ModelStatic<Match> = Match;
@@ -25,6 +26,19 @@ class MatchService {
       ],
     });
     return matches;
+  }
+
+  async attMatch(id: number): Promise<Res> {
+    await this.model.update({ inProgress: false }, { where: { id } });
+    return { message: 'Finished' };
+  }
+
+  async attMatchScore(id: number, homeGoals: number, awayGoals: number): Promise<Res> {
+    await this.model.update(
+      { homeTeamGoals: homeGoals, awayTeamGoals: awayGoals },
+      { where: { id } },
+    );
+    return { message: 'Finished' };
   }
 }
 

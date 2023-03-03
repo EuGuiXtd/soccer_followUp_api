@@ -24,6 +24,8 @@ class App {
     this.app.post('/login', MiddlewareLogin.validateLogin, userController.login);
     this.app.get('/login/role', ValidateJWT.validateJWT, userController.getUserRole);
     this.app.get('/matches', matchController.getAll);
+    this.app.patch('/matches/:id/finish', ValidateJWT.validateJWT, matchController.attMatch);
+    this.app.patch('/matches/:id', ValidateJWT.validateJWT, matchController.attMatchScore);
   }
 
   private config():void {

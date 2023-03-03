@@ -14,6 +14,19 @@ class MatchController {
     const matches = await this.matchService.getAll();
     return res.status(200).json(matches);
   };
+
+  public attMatch = async (req: Request, res: Response) => {
+    const id = Number(req.params.id);
+    const matchStatus = await this.matchService.attMatch(id);
+    return res.status(200).json(matchStatus);
+  };
+
+  public attMatchScore = async (req: Request, res: Response) => {
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const id = Number(req.params.id);
+    const matchStatus = await this.matchService.attMatchScore(id, homeTeamGoals, awayTeamGoals);
+    return res.status(200).json(matchStatus);
+  };
 }
 
 export default MatchController;

@@ -21,7 +21,7 @@ module.exports = {
     },
     home_team_goals: {
       allowNull: false,
-      type: Sequelize.STRING
+      type: Sequelize.INTEGER
     },
     away_team_id: {
       allowNull: false,
@@ -35,7 +35,7 @@ module.exports = {
     },
     away_team_goals: {
       allowNull: false,
-      type: Sequelize.STRING
+      type: Sequelize.INTEGER
     },
     in_progress: {
       allowNull: false,
