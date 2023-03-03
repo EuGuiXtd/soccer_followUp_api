@@ -3,6 +3,7 @@ import TeamController from './controllers/team.controller';
 import UserController from './controllers/user.controller';
 import MiddlewareLogin from './middlewares/login.middlewares';
 import ValidateJWT from './middlewares/validateJWT';
+import MatchController from './controllers/matche.controller';
 
 class App {
   public app: express.Express;
@@ -12,6 +13,7 @@ class App {
 
     const teamController = new TeamController();
     const userController = new UserController();
+    const matchController = new MatchController();
 
     this.config();
 
@@ -21,6 +23,7 @@ class App {
     this.app.get('/teams/:id', teamController.getById);
     this.app.post('/login', MiddlewareLogin.validateLogin, userController.login);
     this.app.get('/login/role', ValidateJWT.validateJWT, userController.getUserRole);
+    this.app.get('/matches', matchController.getAll);
   }
 
   private config():void {
