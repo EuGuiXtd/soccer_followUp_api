@@ -14,13 +14,6 @@ class TeamController {
     const team = await this.teamService.getById(id);
     res.status(200).json(team);
   };
-
-/*   public create = async (req: Request, res: Response) => {
-    const product = req.body;
-
-    const productCreated = await this.teamService.create(product);
-    res.status(201).json(productCreated);
-  }; */
 }
 
 export default TeamController;

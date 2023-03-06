@@ -4,6 +4,7 @@ import UserController from './controllers/user.controller';
 import MiddlewareLogin from './middlewares/login.middlewares';
 import ValidateJWT from './middlewares/validateJWT';
 import MatchController from './controllers/matche.controller';
+import LeardboarderController from './controllers/leadboarder.controller';
 
 class App {
   public app: express.Express;
@@ -14,6 +15,7 @@ class App {
     const teamController = new TeamController();
     const userController = new UserController();
     const matchController = new MatchController();
+    const leardboarderController = new LeardboarderController();
 
     this.config();
 
@@ -27,6 +29,7 @@ class App {
     this.app.patch('/matches/:id/finish', ValidateJWT.validateJWT, matchController.attMatch);
     this.app.patch('/matches/:id', ValidateJWT.validateJWT, matchController.attMatchScore);
     this.app.post('/matches', ValidateJWT.validateJWT, matchController.createMatch);
+    this.app.get('/leaderboard/home', leardboarderController.leaderboardHome);
   }
 
   private config():void {
