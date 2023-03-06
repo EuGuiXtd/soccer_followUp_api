@@ -30,6 +30,8 @@ class App {
     this.app.patch('/matches/:id', ValidateJWT.validateJWT, matchController.attMatchScore);
     this.app.post('/matches', ValidateJWT.validateJWT, matchController.createMatch);
     this.app.get('/leaderboard/home', leardboarderController.leaderboardHome);
+    this.app.get('/leaderboard/away', leardboarderController.leaderboardAway);
+    this.app.get('/leaderboard', leardboarderController.leaderboardAll);
   }
 
   private config():void {
