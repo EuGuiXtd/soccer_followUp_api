@@ -1,7 +1,7 @@
 # Soccer Follow-up API:
 
 # Contexto:
-O projeto trata-se de uma aplicação na qual o usuário pode visualizar e cadastrar jogos de futebol virtuais, podendo editar os gols da partida conforme necessário. Há também a opção de visualizar a tabela de classificação/ranking em certos endpoints.
+O projeto é uma aplicação na qual o usuário pode visualizar e cadastrar jogos de futebol virtuais, podendo editar os gols da partida conforme necessário. Há também a opção de visualizar a tabela de classificação/ranking em certos endpoints.
 
 # Habilidades pessoais desenvolvidas:
 - TypeScript;
